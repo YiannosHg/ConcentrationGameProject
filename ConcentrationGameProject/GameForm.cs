@@ -14,7 +14,7 @@ namespace ConcentrationGameProject
     {
         private Button[] pictureButtons;
 
-        // Game variables
+        // Default game variables
         int size = 5, rule = 2, cardSize = 60;
         int totalMoves = 0;
         List<Button> moves = new List<Button>();
@@ -51,11 +51,11 @@ namespace ConcentrationGameProject
 
         private void GameForm_Load(object sender, EventArgs e)
         {
-            createPictureButtons();
+            createPictureButtons(size, cardSize, rule);
             //countMoves.ThresholdReached += countMoves_ThresholdReached;
         }
 
-        private void createPictureButtons()
+        private void createPictureButtons(int size, int cardSize, int rule)
         {
             pictureButtons = new Button[size * rule]; // Create array of buttons
 
@@ -143,6 +143,7 @@ namespace ConcentrationGameProject
             cardSize = 60;
             mediumToolStripMenuItem.Checked = false;
             largeToolStripMenuItem.Checked = false;
+            createPictureButtons(size, cardSize, rule);
         }
 
         private void mediumToolStripMenuItem_Click(object sender, EventArgs e)
@@ -151,6 +152,7 @@ namespace ConcentrationGameProject
             cardSize = 80;
             smallToolStripMenuItem.Checked = false;
             largeToolStripMenuItem.Checked = false;
+            createPictureButtons(size, cardSize, rule);
         }
 
         private void largeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -159,24 +161,27 @@ namespace ConcentrationGameProject
             cardSize = 100;
             smallToolStripMenuItem.Checked = false;
             mediumToolStripMenuItem.Checked = false;
-        }
-
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AboutForm about = new AboutForm();
-            about.ShowDialog();
+            createPictureButtons(size, cardSize, rule);
         }
 
         private void match2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             rule = 2;
             match3ToolStripMenuItem.Checked = false;
+            createPictureButtons(size, cardSize, rule);
         }
 
         private void match3ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             rule = 3;
             match2ToolStripMenuItem.Checked = false;
+            createPictureButtons(size, cardSize, rule);
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutForm about = new AboutForm();
+            about.ShowDialog();
         }
     }
 }

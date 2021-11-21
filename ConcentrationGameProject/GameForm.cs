@@ -17,9 +17,12 @@ namespace ConcentrationGameProject
         // Default game variables
         int size = 5, rule = 2, cardSize = 60;
         int totalMoves = 0;
-        List<Button> moves = new List<Button>();
         int matchedPictures = 0;
         int countMoves = 0;
+
+        // List of the moves played
+        List<Button> moves = new List<Button>();
+        
         
         public GameForm()
         {
@@ -64,11 +67,14 @@ namespace ConcentrationGameProject
             ++totalMoves;
             if (countMoves == rule)
                 checkForMatch();
+                //changePicturesTimer.Start();
             checkForEndOfGame();
         }
 
-        private void deletePictureButtons()
+        private void resetGame()
         {
+            totalMoves = 0;
+            matchedPictures = 0;
             this.Controls.Clear();
             this.InitializeComponent();
         }
@@ -113,7 +119,14 @@ namespace ConcentrationGameProject
         {
             if (size == matchedPictures)
             {
-                MessageBox.Show($"The game was finished in {countMoves} moves. \nDo you want to play again?", "Game finished", MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBox.Show($"The game was finished in {totalMoves} moves. \nDo you want to play again?", "Game finished", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    resetGame();
+                    createPictureButtons(size, cardSize, rule);
+                }
+                else
+                    this.Close();
             }
         }
 
@@ -124,8 +137,7 @@ namespace ConcentrationGameProject
 
         private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Controls.Clear();
-            this.InitializeComponent();
+            resetGame();
             createPictureButtons(size, cardSize,rule);
         }
 
@@ -135,7 +147,7 @@ namespace ConcentrationGameProject
             cardSize = 60;
             mediumToolStripMenuItem.Checked = false;
             largeToolStripMenuItem.Checked = false;
-            deletePictureButtons();
+            resetGame();
             createPictureButtons(size, cardSize, rule);
         }
 
@@ -145,7 +157,7 @@ namespace ConcentrationGameProject
             cardSize = 80;
             smallToolStripMenuItem.Checked = false;
             largeToolStripMenuItem.Checked = false;
-            deletePictureButtons();
+            resetGame();
             createPictureButtons(size, cardSize, rule);
         }
 
@@ -155,7 +167,7 @@ namespace ConcentrationGameProject
             cardSize = 100;
             smallToolStripMenuItem.Checked = false;
             mediumToolStripMenuItem.Checked = false;
-            deletePictureButtons();
+            resetGame();
             createPictureButtons(size, cardSize, rule);
         }
 
@@ -166,7 +178,7 @@ namespace ConcentrationGameProject
             match3ToolStripMenuItem.CheckState = CheckState.Unchecked;
             match2ToolStripMenuItem.Checked = true;
             match2ToolStripMenuItem.CheckState = CheckState.Checked;
-            deletePictureButtons();
+            resetGame();
             createPictureButtons(size, cardSize, rule);
         }
 
@@ -177,7 +189,7 @@ namespace ConcentrationGameProject
             match2ToolStripMenuItem.CheckState = CheckState.Unchecked;
             match3ToolStripMenuItem.Checked = true;
             match3ToolStripMenuItem.CheckState = CheckState.Checked;
-            deletePictureButtons();
+            resetGame();
             createPictureButtons(size, cardSize, rule);
         }
 
@@ -185,6 +197,11 @@ namespace ConcentrationGameProject
         {
             AboutForm about = new AboutForm();
             about.ShowDialog();
+        }
+
+        private void changePicturesTimer_Tick(object sender, EventArgs e)
+        {
+            //checkForMatch();
         }
     }
 }

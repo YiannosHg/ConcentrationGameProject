@@ -29,6 +29,7 @@ namespace ConcentrationGameProject
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,6 +42,7 @@ namespace ConcentrationGameProject
             this.match2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.match3ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changePicturesTimer = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,14 +71,14 @@ namespace ConcentrationGameProject
             // newGameToolStripMenuItem
             // 
             this.newGameToolStripMenuItem.Name = "newGameToolStripMenuItem";
-            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newGameToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.newGameToolStripMenuItem.Text = "New Game";
             this.newGameToolStripMenuItem.Click += new System.EventHandler(this.newGameToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -94,7 +96,7 @@ namespace ConcentrationGameProject
             // 
             this.smallToolStripMenuItem.CheckOnClick = true;
             this.smallToolStripMenuItem.Name = "smallToolStripMenuItem";
-            this.smallToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.smallToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.smallToolStripMenuItem.Text = "Small";
             this.smallToolStripMenuItem.Click += new System.EventHandler(this.smallToolStripMenuItem_Click);
             // 
@@ -102,7 +104,7 @@ namespace ConcentrationGameProject
             // 
             this.mediumToolStripMenuItem.CheckOnClick = true;
             this.mediumToolStripMenuItem.Name = "mediumToolStripMenuItem";
-            this.mediumToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.mediumToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.mediumToolStripMenuItem.Text = "Medium";
             this.mediumToolStripMenuItem.Click += new System.EventHandler(this.mediumToolStripMenuItem_Click);
             // 
@@ -110,7 +112,7 @@ namespace ConcentrationGameProject
             // 
             this.largeToolStripMenuItem.CheckOnClick = true;
             this.largeToolStripMenuItem.Name = "largeToolStripMenuItem";
-            this.largeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.largeToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.largeToolStripMenuItem.Text = "Large";
             this.largeToolStripMenuItem.Click += new System.EventHandler(this.largeToolStripMenuItem_Click);
             // 
@@ -127,7 +129,7 @@ namespace ConcentrationGameProject
             // 
             this.match2ToolStripMenuItem.CheckOnClick = true;
             this.match2ToolStripMenuItem.Name = "match2ToolStripMenuItem";
-            this.match2ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.match2ToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.match2ToolStripMenuItem.Text = "Match 2";
             this.match2ToolStripMenuItem.Click += new System.EventHandler(this.match2ToolStripMenuItem_Click);
             // 
@@ -135,7 +137,7 @@ namespace ConcentrationGameProject
             // 
             this.match3ToolStripMenuItem.CheckOnClick = true;
             this.match3ToolStripMenuItem.Name = "match3ToolStripMenuItem";
-            this.match3ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.match3ToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.match3ToolStripMenuItem.Text = "Match 3";
             this.match3ToolStripMenuItem.Click += new System.EventHandler(this.match3ToolStripMenuItem_Click);
             // 
@@ -145,6 +147,12 @@ namespace ConcentrationGameProject
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // changePicturesTimer
+            // 
+            this.changePicturesTimer.Enabled = true;
+            this.changePicturesTimer.Interval = 500;
+            this.changePicturesTimer.Tick += new System.EventHandler(this.changePicturesTimer_Tick);
             // 
             // GameForm
             // 
@@ -181,6 +189,7 @@ namespace ConcentrationGameProject
         private System.Windows.Forms.ToolStripMenuItem match2ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem match3ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.Timer changePicturesTimer;
     }
 }
 

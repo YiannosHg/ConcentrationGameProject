@@ -36,6 +36,10 @@ namespace ConcentrationGameProject
 
         private void createPictureButtons(int size, int cardSize, int rule)
         {
+            // Create array with random numbers that represent picture for buttons
+            Random random = new Random();
+            int[] array = Enumerable.Range(0, rule * size).OrderBy(c => random.Next()).ToArray();
+            
             pictureButtons = new Button[size * rule]; // Create array of buttons
 
             for (int i = 0; i < size; ++i)
@@ -48,7 +52,8 @@ namespace ConcentrationGameProject
                     pictureButtons[i + j * size].Height = cardSize;
                     pictureButtons[i + j * size].BackgroundImage = Properties.Resources.qMark;
                     pictureButtons[i + j * size].BackgroundImageLayout = ImageLayout.Zoom;
-                    pictureButtons[i + j * size].Tag = i;
+                    //pictureButtons[i + j * size].Tag = i; // all buttons in the row have the same picture
+                    pictureButtons[i + j * size].Tag = array[i + j * size]/rule; // random picture for each button
                     pictureButtons[i + j * size].Location = new Point(cardSize * (i % size) + 20 + i * 10, (cardSize * (i / size) + cardSize + 2 * j * cardSize) + 10);
 
                     // Events

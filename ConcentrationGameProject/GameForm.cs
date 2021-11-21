@@ -14,13 +14,35 @@ namespace ConcentrationGameProject
     {
         private Button[] pictureButtons;
 
-        // Initialize game variables with default settings
-        int size = 5;
-        int rule = 2;
-        int cardSize = 60;
-        int countMoves = 0;
+        // Game variables
+        int size = 5, rule = 2, cardSize = 60;
+        int totalMoves = 0;
         List<Button> moves = new List<Button>();
         int matchedPictures = 0;
+
+        public class Counter
+        {
+            public int threshold { get; set; }
+            public int total = 0;
+
+            public void Add()
+            {
+                ++total;
+                if (total == threshold)
+                {
+                    ThresholdReached?.Invoke(this, EventArgs.Empty);
+                }
+            }
+
+            public event EventHandler ThresholdReached;
+        }
+
+        static void countMoves_ThreasholdReached(object sender, EventArgs e)
+        {
+           
+        }
+
+        Counter countMoves = new Counter();
 
         public GameForm()
         {
@@ -30,10 +52,7 @@ namespace ConcentrationGameProject
         private void GameForm_Load(object sender, EventArgs e)
         {
             createPictureButtons();
-            //gameLoop();
-            /*while (moves.Count != rule)
-                if (0 == countMoves % rule)
-                    checkForMatch();*/
+            //countMoves.ThresholdReached += countMoves_ThresholdReached;
         }
 
         private void createPictureButtons()
@@ -65,29 +84,14 @@ namespace ConcentrationGameProject
             string imageName = "image" + ((Button)sender).Tag;
             ((Button)sender).BackgroundImage = (Bitmap)Properties.Resources.ResourceManager.GetObject(imageName);
             moves.Add((Button)sender);
-            ++countMoves;
-
-            // Bitmap tempPic = (Bitmap)Properties.Resources.ResourceManager.GetObject((string)((Button)sender).Tag);
-            /*Bitmap tempPic = (Bitmap)((Button)sender).BackgroundImage;
-            ((Button)sender).BackgroundImage = (Bitmap)Properties.Resources.ResourceManager.GetObject((string)((Button)sender).Tag);
-            ((Button)sender).Tag = tempPic;*/
-
-            /*string imageName = "image" + ((Button)sender).Tag;
-            ((Button)sender).BackgroundImage = (Bitmap)Properties.Resources.ResourceManager.GetObject(imageName);*/
+            countMoves.Add();
+            Console.WriteLine($"CountMoves: {countMoves}");
+            ++totalMoves;
         }
 
-        private void gameLoop()
+        public void checkForMatch()
         {
-            while (matchedPictures < size)
-                if (0 == countMoves % rule)
-                    checkForMatch();
-
-            MessageBox.Show($"Total clicks: {countMoves}");
-        }
-
-        private void checkForMatch()
-        {
-            //List<int> movesToCheck = new List<int>();
+            Console.WriteLine("Entered");
 
             if (2 == rule)
             {
@@ -119,7 +123,60 @@ namespace ConcentrationGameProject
                     moves[2].BackgroundImage = Properties.Resources.qMark;
                 }
             }
+            countMoves.total = 0;
             moves.Clear();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void smallToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            size = 5;
+            cardSize = 60;
+            mediumToolStripMenuItem.Checked = false;
+            largeToolStripMenuItem.Checked = false;
+        }
+
+        private void mediumToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            size = 11;
+            cardSize = 80;
+            smallToolStripMenuItem.Checked = false;
+            largeToolStripMenuItem.Checked = false;
+        }
+
+        private void largeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            size = 17;
+            cardSize = 100;
+            smallToolStripMenuItem.Checked = false;
+            mediumToolStripMenuItem.Checked = false;
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutForm about = new AboutForm();
+            about.ShowDialog();
+        }
+
+        private void match2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            rule = 2;
+            match3ToolStripMenuItem.Checked = false;
+        }
+
+        private void match3ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            rule = 3;
+            match2ToolStripMenuItem.Checked = false;
         }
     }
 }

@@ -19,31 +19,8 @@ namespace ConcentrationGameProject
         int totalMoves = 0;
         List<Button> moves = new List<Button>();
         int matchedPictures = 0;
-
-        public class Counter
-        {
-            public int threshold { get; set; }
-            public int total = 0;
-
-            public void Add()
-            {
-                ++total;
-                if (total == threshold)
-                {
-                    ThresholdReached?.Invoke(this, EventArgs.Empty);
-                }
-            }
-
-            public event EventHandler ThresholdReached;
-        }
-
-        static void countMoves_ThreasholdReached(object sender, EventArgs e)
-        {
-           
-        }
-
-        Counter countMoves = new Counter();
-
+        int countMoves = 0;
+        
         public GameForm()
         {
             InitializeComponent();
@@ -52,7 +29,6 @@ namespace ConcentrationGameProject
         private void GameForm_Load(object sender, EventArgs e)
         {
             createPictureButtons(size, cardSize, rule);
-            //countMoves.ThresholdReached += countMoves_ThresholdReached;
         }
 
         private void createPictureButtons(int size, int cardSize, int rule)
@@ -84,9 +60,11 @@ namespace ConcentrationGameProject
             string imageName = "image" + ((Button)sender).Tag;
             ((Button)sender).BackgroundImage = (Bitmap)Properties.Resources.ResourceManager.GetObject(imageName);
             moves.Add((Button)sender);
-            countMoves.Add();
-            Console.WriteLine($"CountMoves: {countMoves}");
+            ++countMoves;
             ++totalMoves;
+            if (countMoves == rule)
+                checkForMatch();
+            checkForEndOfGame();
         }
 
         private void deletePictureButtons()
@@ -97,11 +75,9 @@ namespace ConcentrationGameProject
 
         public void checkForMatch()
         {
-            Console.WriteLine("Entered");
-
             if (2 == rule)
             {
-                if (moves[0].Tag == moves[1].Tag)
+                if ((int)moves[0].Tag == (int)moves[1].Tag)
                 {
                     moves[0].Enabled = false;
                     moves[1].Enabled = false;
@@ -115,7 +91,7 @@ namespace ConcentrationGameProject
             }
             else // 3 = rule
             {
-                if (moves[0].Tag == moves[1].Tag && moves[0].Tag == moves[2].Tag)
+                if ((int)moves[0].Tag == (int)moves[1].Tag && (int)moves[0].Tag == (int)moves[2].Tag)
                 {
                     moves[0].Enabled = false;
                     moves[1].Enabled = false;
@@ -129,8 +105,16 @@ namespace ConcentrationGameProject
                     moves[2].BackgroundImage = Properties.Resources.qMark;
                 }
             }
-            countMoves.total = 0;
+            countMoves = 0;
             moves.Clear();
+        }
+
+        private void checkForEndOfGame()
+        {
+            if (size == matchedPictures)
+            {
+                MessageBox.Show($"The game was finished in {countMoves} moves. \nDo you want to play again?", "Game finished", MessageBoxButtons.YesNo);
+            }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)

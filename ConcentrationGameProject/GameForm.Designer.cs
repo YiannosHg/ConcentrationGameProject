@@ -53,7 +53,7 @@ namespace ConcentrationGameProject
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(692, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(601, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -92,9 +92,7 @@ namespace ConcentrationGameProject
             // 
             // smallToolStripMenuItem
             // 
-            this.smallToolStripMenuItem.Checked = true;
             this.smallToolStripMenuItem.CheckOnClick = true;
-            this.smallToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.smallToolStripMenuItem.Name = "smallToolStripMenuItem";
             this.smallToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.smallToolStripMenuItem.Text = "Small";
@@ -127,9 +125,7 @@ namespace ConcentrationGameProject
             // 
             // match2ToolStripMenuItem
             // 
-            this.match2ToolStripMenuItem.Checked = true;
             this.match2ToolStripMenuItem.CheckOnClick = true;
-            this.match2ToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.match2ToolStripMenuItem.Name = "match2ToolStripMenuItem";
             this.match2ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.match2ToolStripMenuItem.Text = "Match 2";
@@ -154,7 +150,8 @@ namespace ConcentrationGameProject
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(692, 451);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(601, 369);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(161)));
             this.MainMenuStrip = this.menuStrip1;

@@ -70,7 +70,7 @@ namespace ConcentrationGameProject
                     pictureButtons[i + j * size].BackgroundImage = Properties.Resources.qMark;
                     pictureButtons[i + j * size].BackgroundImageLayout = ImageLayout.Zoom;
                     pictureButtons[i + j * size].Tag = i;
-                    pictureButtons[i + j * size].Location = new Point(cardSize * (i % size) + cardSize + i * 10, (cardSize * (i / size) + cardSize + 2 * j * cardSize) + 10);
+                    pictureButtons[i + j * size].Location = new Point(cardSize * (i % size) + 20 + i * 10, (cardSize * (i / size) + cardSize + 2 * j * cardSize) + 10);
 
                     // Events
                     pictureButtons[i + j * size].Click += new EventHandler(pictureButtons_ClickHandler);
@@ -87,6 +87,12 @@ namespace ConcentrationGameProject
             countMoves.Add();
             Console.WriteLine($"CountMoves: {countMoves}");
             ++totalMoves;
+        }
+
+        private void deletePictureButtons()
+        {
+            this.Controls.Clear();
+            this.InitializeComponent();
         }
 
         public void checkForMatch()
@@ -134,7 +140,9 @@ namespace ConcentrationGameProject
 
         private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            this.Controls.Clear();
+            this.InitializeComponent();
+            createPictureButtons(size, cardSize,rule);
         }
 
         private void smallToolStripMenuItem_Click(object sender, EventArgs e)
@@ -143,6 +151,7 @@ namespace ConcentrationGameProject
             cardSize = 60;
             mediumToolStripMenuItem.Checked = false;
             largeToolStripMenuItem.Checked = false;
+            deletePictureButtons();
             createPictureButtons(size, cardSize, rule);
         }
 
@@ -152,6 +161,7 @@ namespace ConcentrationGameProject
             cardSize = 80;
             smallToolStripMenuItem.Checked = false;
             largeToolStripMenuItem.Checked = false;
+            deletePictureButtons();
             createPictureButtons(size, cardSize, rule);
         }
 
@@ -161,6 +171,7 @@ namespace ConcentrationGameProject
             cardSize = 100;
             smallToolStripMenuItem.Checked = false;
             mediumToolStripMenuItem.Checked = false;
+            deletePictureButtons();
             createPictureButtons(size, cardSize, rule);
         }
 
@@ -168,6 +179,10 @@ namespace ConcentrationGameProject
         {
             rule = 2;
             match3ToolStripMenuItem.Checked = false;
+            match3ToolStripMenuItem.CheckState = CheckState.Unchecked;
+            match2ToolStripMenuItem.Checked = true;
+            match2ToolStripMenuItem.CheckState = CheckState.Checked;
+            deletePictureButtons();
             createPictureButtons(size, cardSize, rule);
         }
 
@@ -175,6 +190,10 @@ namespace ConcentrationGameProject
         {
             rule = 3;
             match2ToolStripMenuItem.Checked = false;
+            match2ToolStripMenuItem.CheckState = CheckState.Unchecked;
+            match3ToolStripMenuItem.Checked = true;
+            match3ToolStripMenuItem.CheckState = CheckState.Checked;
+            deletePictureButtons();
             createPictureButtons(size, cardSize, rule);
         }
 

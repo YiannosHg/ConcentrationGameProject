@@ -124,7 +124,7 @@ namespace ConcentrationGameProject
         {
             if (size == matchedPictures)
             {
-                DialogResult dialogResult = MessageBox.Show($"The game was finished in {totalMoves} moves. \nDo you want to play again?", "Game finished", MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBox.Show($"The game was completed in {totalMoves} moves. \nDo you want to play again?", "Game completed", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
                     resetGame();
